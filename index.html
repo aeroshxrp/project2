@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microbix Code Scan // Enterprise Vulnerability Auditing Engine</title>
+  
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Global & Glassmorphic Corporate Tokens -->
+  <link rel="stylesheet" href="../../shared/css/variables.css">
+  <link rel="stylesheet" href="../../shared/css/global.css">
+  <link rel="stylesheet" href="../../shared/css/glassmorphism.css">
+  
+  <!-- Core Application Stylesheet -->
+  <link rel="stylesheet" href="css/scan.css">
+  
+  <!-- Corporate Shared Navigation & telemetry scripts -->
+  <script src="../../shared/js/core.js" defer></script>
+  <!-- Application Specific Logic Engine -->
+  <script src="js/scan.js" defer></script>
+</head>
+<body>
+  <div class="microbix-wrapper">
+    <!-- Collapsible Sidebar Navigation mapping external enterprise hosts -->
+    <aside class="microbix-sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">MICROBIX</span>
+        <button class="sidebar-toggle" aria-label="Toggle Navigation">&#x2190;</button>
+      </div>
+      <ul class="sidebar-menu">
+        <li class="menu-item">
+          <a href="http://dashboard.microbix" class="menu-link">
+            <span class="menu-icon">&#x1F4CA;</span>
+            <span class="menu-text">Main Dashboard</span>
+          </a>
+        </li>
+        <li class="menu-item active">
+          <a href="http://scan.microbix" class="menu-link">
+            <span class="menu-icon">&#x1F6E1;</span>
+            <span class="menu-text">Code Scan Engine</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="http://aether.microbix" class="menu-link">
+            <span class="menu-icon">&#x26F2;</span>
+            <span class="menu-text">Aether Control</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <span class="system-version">v2.4.0-intranet</span>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <main class="microbix-main" id="main-deck">
+      <!-- Top Omnisearch & Stats Header -->
+      <header class="microbix-header">
+        <div class="header-left">
+          <div class="omnisearch-container">
+            <span class="omnisearch-icon">&#x1F50D;</span>
+            <input type="text" class="omnisearch-input" placeholder="Search scanning history...">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="status-badge">
+            <span class="status-indicator"></span>
+            <span>Caddy Active (scan.microbix)</span>
+          </div>
+          <div class="profile-dropdown">
+            <div class="profile-avatar">SA</div>
+            <span class="profile-name">SecAdmin</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Central Content Platform -->
+      <div class="viewport-canvas">
+        <div class="matrix-layout" id="interactive-grid">
+          
+          <!-- Phase 1: Ingestion Staging Matrix -->
+          <div class="ingestion-container glass-panel" id="ingestion-deck">
+            <div class="panel-header">
+              <h1>Enterprise Code Security Scanner</h1>
+              <p>Autonomous AI code-auditing engine inspecting payment transaction states, webhook verify procedures, parameter query models, and production secrets.</p>
+            </div>
+            
+            <div class="ingestion-grid">
+              <!-- Drag and Drop Panel -->
+              <div class="drag-drop-panel" id="drop-zone">
+                <div class="drag-drop-inner">
+                  <div class="upload-icon">&#x1F4C1;</div>
+                  <h3>Ingest Local Assets</h3>
+                  <p>Drag & drop code files (.js, .py, .java, .go, .cpp)</p>
+                  <input type="file" id="file-uploader" multiple style="display: none;">
+                  <div class="button-group">
+                    <button class="glass-button" id="browse-btn">Browse Files</button>
+                    <button class="glass-button secondary-glow" id="demo-code-btn" title="Loads standard vulnerable code sample to demonstrate the scan flow">Load Demo Code</button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Split Separator -->
+              <div class="panel-separator">
+                <span>OR</span>
+              </div>
+
+              <!-- Git Integration input panel -->
+              <div class="git-integration-panel">
+                <div class="git-inner">
+                  <div class="git-icon">&#x1F517;</div>
+                  <h3>Cloning Gateway Integration</h3>
+                  <p>Target a remote secure Git directory link for scanning</p>
+                  <div class="git-input-container">
+                    <input type="url" id="git-repo-url" class="glass-input" placeholder="https://github.com/microbix/payment-engine.git">
+                  </div>
+                  <button class="glass-button" id="git-scan-btn">
+                    <span>Initialize System Scan</span>
+                    <span>&#x2794;</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Diagnostics Telemetry (Dashboard Widgets) -->
+            <div class="diagnostics-dashboard">
+              <div class="diagnostic-card">
+                <div class="diag-header">
+                  <span class="diag-label">AST Parser Status</span>
+                  <span class="diag-status ok">Ready</span>
+                </div>
+                <div class="diag-value" id="diag-ast-nodes">---</div>
+                <div class="diag-meta">Lexical scopes indexed</div>
+              </div>
+              <div class="diagnostic-card">
+                <div class="diag-header">
+                  <span class="diag-label">Scan Speed Metrics</span>
+                  <span class="diag-status ok">Nominal</span>
+                </div>
+                <div class="diag-value" id="diag-scan-speed">---</div>
+                <div class="diag-meta">Klocs parsed per second</div>
+              </div>
+              <div class="diagnostic-card">
+                <div class="diag-header">
+                  <span class="diag-label">Memory Allocation</span>
+                  <span class="diag-status warning">56%</span>
+                </div>
+                <div class="diag-value" id="diag-memory">124 MB</div>
+                <div class="diag-meta">Sandbox heap usage</div>
+              </div>
+              <div class="diagnostic-card">
+                <div class="diag-header">
+                  <span class="diag-label">Corporate Proxies</span>
+                  <span class="diag-status ok">Secure</span>
+                </div>
+                <div class="diag-value" id="diag-ssl">mTLS</div>
+                <div class="diag-meta">Microbix Intranet Active</div>
+              </div>
+            </div>
+
+            <!-- Recent scan telemetry table -->
+            <div class="scan-history-section">
+              <h3>System Scanning Telemetry</h3>
+              <table class="telemetry-table">
+                <thead>
+                  <tr>
+                    <th>Scan Target ID</th>
+                    <th>Source Target</th>
+                    <th>Execution Time</th>
+                    <th>Discovered Risks</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="telemetry-rows">
+                  <tr>
+                    <td>#SC-8094</td>
+                    <td>git://checkout-service</td>
+                    <td>10 min ago</td>
+                    <td><span class="risk-indicator crit">3 Critical</span></td>
+                    <td><span class="status-pill fail">Triaged</span></td>
+                  </tr>
+                  <tr>
+                    <td>#SC-8091</td>
+                    <td>local://auth-middleware.js</td>
+                    <td>42 min ago</td>
+                    <td><span class="risk-indicator clean">0 Vulnerabilities</span></td>
+                    <td><span class="status-pill pass">Passed</span></td>
+                  </tr>
+                  <tr>
+                    <td>#SC-8089</td>
+                    <td>git://ledger-core</td>
+                    <td>3 hours ago</td>
+                    <td><span class="risk-indicator med">1 Medium</span></td>
+                    <td><span class="status-pill fail">Triaged</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Phase 2: Detecting... Automation Engine Modal -->
+    <div class="processing-overlay" id="loading-overlay">
+      <div class="processing-modal glass-panel-glow">
+        <div class="hologram-radar">
+          <!-- SVG Double concentric scanning radar rings -->
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="45" class="radar-ring outer-ring" />
+            <circle cx="50" cy="50" r="30" class="radar-ring inner-ring" />
+            <line x1="50" y1="50" x2="50" y2="5" class="radar-sweep" />
+          </svg>
+        </div>
+        <div class="pulsing-status">Detecting Code Deficiencies...</div>
+        
+        <!-- Monospaced terminal viewport stream -->
+        <div class="compiler-terminal">
+          <div class="terminal-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-title">AST Token Analyzer Terminal</span>
+          </div>
+          <div class="terminal-body" id="terminal-stream">
+            <!-- Simulated lexical metric logs stream dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3: Elastic Priority Triage Sidebar Panel -->
+    <div class="issues-sidebar" id="triage-sidebar">
+      <div class="sidebar-triage-header">
+        <div>
+          <h2>Discovered Issues</h2>
+          <span class="issues-counter" id="total-issues-counter">0 Issues Found</span>
+        </div>
+        <button class="glass-button reset-scan-btn" id="reset-scan-btn">Scan New Assets</button>
+      </div>
+      
+      <!-- Issue Cards Aggregate Stack -->
+      <div class="issues-list" id="triage-issues-stack">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>
